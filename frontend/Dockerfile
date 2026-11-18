@@ -1,8 +1,7 @@
-# build env
-FROM node:21.7.1-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm ci --legacy-peer-deps
 COPY . ./
 RUN npm run build
-CMD cp -r build result_build
+CMD ["sh", "-c", "cp -r build/. /app/result_build/"]
